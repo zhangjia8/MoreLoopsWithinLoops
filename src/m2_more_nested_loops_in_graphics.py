@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Jiatong Zhang.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -49,10 +49,33 @@ def draw_upside_down_wall(rectangle, n, window):
     and n is nonnegative.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # ------------------------------------------------------------------
+    corn1 = rectangle.get_upper_right_corner()
+    corn2 = rectangle.get_lower_left_corner()
 
+    dx = rectangle.get_width()
+    dy = rectangle.get_height()
+
+    x1 = rectangle.get_upper_right_corner().x
+    x2 = rectangle.get_lower_left_corner().x
+    y1 = rectangle.get_upper_right_corner().y
+    y2 = rectangle.get_lower_left_corner().y
+
+    for k in range(n):
+        for j in range(k + 1):
+            rec = rg.Rectangle(rg.Point(x1, y1), rg.Point(x2, y2))
+            rec.attach_to(window)
+            window.render(0.05)
+            x1 -= dx
+            x2 -= dx
+
+        x1 = corn1.x + (dx/2) * (k+1)
+        x2 = corn2.x + (dx/2) * (k+1)
+        y1 = corn1.y - dy * (k+1)
+        y2 = corn2.y - dy * (k+1)
+        
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
